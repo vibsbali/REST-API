@@ -38,7 +38,9 @@ namespace Library.API
             var connectionString = Configuration["connectionStrings:libraryDBConnectionString"];
             services.AddDbContext<LibraryContext>(o => o.UseSqlServer(connectionString));
 
+
             // register the repository
+            // seeding happens in Configure method
             services.AddScoped<ILibraryRepository, LibraryRepository>();
         }
 
@@ -75,8 +77,11 @@ namespace Library.API
 
                 //Creation of Author
                 cfg.CreateMap<AuthorForCreationDto, Author>();
+
+                cfg.CreateMap<BookForCreationDto, Book>();
             });
 
+            //setup seeding, the database is setup in ConfigureServices
             libraryContext.EnsureSeedDataForContext();
 
             app.UseMvc(); 

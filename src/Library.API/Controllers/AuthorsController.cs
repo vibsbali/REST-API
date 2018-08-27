@@ -30,14 +30,15 @@ namespace Library.API.Controllers
         }
 
         [HttpGet("{id}", Name = "GetAuthor")]
+        //The name is associated with Create Author Method below 
         public IActionResult GetAuthor(Guid id)
         {
-            var autorFromRepo = _libraryRepository.GetAuthor(id);
+            var authorFromRepo = _libraryRepository.GetAuthor(id);
 
-            if (autorFromRepo == null)
+            if (authorFromRepo == null)
                 return NotFound();
 
-            var author = Mapper.Map<AuthorDto>(autorFromRepo);
+            var author = Mapper.Map<AuthorDto>(authorFromRepo);
             return Ok(author);
         }
 
